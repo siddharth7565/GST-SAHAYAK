@@ -1,0 +1,67 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 7 0 R >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 348 >>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(GST Sahayak Synthetic Test Document) Tj
+0 -30 Td
+/F1 12 Tf
+(This document is fictional and is used only to test PDF text extraction.) Tj
+0 -20 Td
+(Section 1: Sample GST Notice Overview) Tj
+0 -20 Td
+(Taxable Value: INR 100000. Integrated Tax Rate: 18%.) Tj
+0 -20 Td
+(This synthetic page contains test data for Page 1.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 285 >>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(GST Sahayak Synthetic Test Document) Tj
+0 -30 Td
+/F1 12 Tf
+(Section 2: Verification of Page Boundaries) Tj
+0 -20 Td
+(This is additional fictional text on Page 2 to verify boundary preservation.) Tj
+0 -20 Td
+(Synthetic Notice Reference: SYN-GST-2026-001.) Tj
+ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000000373 00000 n 
+0000000443 00000 n 
+0000000841 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+1176
+%%EOF
