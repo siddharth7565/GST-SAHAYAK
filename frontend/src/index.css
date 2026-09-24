@@ -1,19 +1,141 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #212529;
-  background-color: #f8f9fa;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 33 100% 97%; /* #FFF8F0 Cream */
+    --foreground: 24 24% 14%; /* #2B211B Dark Text */
+    --card: 0 0% 100%;
+    --card-foreground: 24 24% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 24% 14%;
+    --primary: 27 87% 67%; /* #F4A261 Primary Orange */
+    --primary-foreground: 24 24% 14%;
+    --secondary: 26 81% 91%; /* #FDE8D2 Soft Peach */
+    --secondary-foreground: 20 66% 56%; /* #D97745 Deep Orange */
+    --muted: 30 20% 94%;
+    --muted-foreground: 22 15% 42%;
+    --accent: 27 87% 67%;
+    --accent-foreground: 24 24% 14%;
+    --destructive: 8 52% 57%; /* #C96B5B Muted Red */
+    --destructive-foreground: 0 0% 100%;
+    --border: 38 46% 84%; /* #E8DEC4 */
+    --input: 38 46% 84%;
+    --ring: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  body {
+    background-color: #FFF8F0;
+    color: #2B211B;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF3E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E8DEC4;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F4A261;
+}
+
+/* Smooth markdown styles */
+.prose-gst h1, .prose-gst h2, .prose-gst h3, .prose-gst h4 {
+  color: #2B211B;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-gst h1 { font-size: 1.35rem; border-bottom: 1px solid #E8DEC4; padding-bottom: 0.3rem; }
+.prose-gst h2 { font-size: 1.2rem; }
+.prose-gst h3 { font-size: 1.05rem; }
+
+.prose-gst p {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: #2B211B;
+}
+
+.prose-gst ul, .prose-gst ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+  list-style-type: disc;
+}
+
+.prose-gst ol {
+  list-style-type: decimal;
+}
+
+.prose-gst li {
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+.prose-gst table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.prose-gst th, .prose-gst td {
+  border: 1px solid #E8DEC4;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.prose-gst th {
+  background-color: #FDE8D2;
+  font-weight: 600;
+  color: #2B211B;
+}
+
+.prose-gst blockquote {
+  border-left: 3px solid #F4A261;
+  padding-left: 0.75rem;
+  margin-left: 0;
+  color: #55483F;
+  font-style: italic;
+}
+
+.prose-gst code {
+  background-color: #FFF3E8;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.85em;
+  color: #D97745;
+}
+
+.prose-gst pre {
+  background-color: #2B211B;
+  color: #FFF8F0;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-gst pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
 }
