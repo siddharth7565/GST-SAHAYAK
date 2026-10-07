@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, and_, text
 from database.models import DocumentModel, DocumentChunkModel, Vector
 from services.embedding_service import embedding_service
+from services.query_expansion import query_expansion_service
 
 DEFAULT_TOP_K = 5
 MAX_TOP_K = 20
@@ -195,6 +196,61 @@ class RetrievalService:
         return query_obj
 
     def search_hybrid_chunks(
+        self,
+        db: Session,
+        query: str,
+        top_k: Optional[int] = None,
+        min_similarity: Optional[float] = None,
+        financial_year: Optional[str] = None,
+        as_of_date: Optional[str] = None,
+        vector_weight: Optional[float] = None,
+        keyword_weight: Optional[float] = None,
+        enable_query_expansion: bool = False
+    ) -> List[dict]:
+        """
+        Executes hybrid search combining pgvector dense semantic search
+        and PostgreSQL full-text keyword search with query expansion support.
+        """
+        if enable_query_expansion:
+            # Expand query and merge results
+            queries_to_run = query_expansion_service.expand_query(query)
+            merged_results: Dict[str, dict] = {}
+
+            for q in queries_to_run:
+                results = self._search_hybrid_chunks_single(
+                    db=db,
+                    query=q,
+                    top_k=top_k,
+                    min_similarity=min_similarity,
+                    financial_year=financial_year,
+                    as_of_date=as_of_date,
+                    vector_weight=vector_weight,
+                    keyword_weight=keyword_weight
+                )
+                # Merge by chunk_id, keep max score
+                for r in results:
+                    cid = r["chunk_id"]
+                    if cid not in merged_results or r["hybrid_score"] > merged_results[cid]["hybrid_score"]:
+                        merged_results[cid] = r
+
+            # Convert to list and sort
+            final_results = list(merged_results.values())
+            final_results.sort(key=lambda x: x["hybrid_score"], reverse=True)
+            k = top_k if top_k is not None else self.default_top_k
+            return final_results[:k]
+        else:
+            return self._search_hybrid_chunks_single(
+                db=db,
+                query=query,
+                top_k=top_k,
+                min_similarity=min_similarity,
+                financial_year=financial_year,
+                as_of_date=as_of_date,
+                vector_weight=vector_weight,
+                keyword_weight=keyword_weight
+            )
+
+    def _search_hybrid_chunks_single(
         self,
         db: Session,
         query: str,
