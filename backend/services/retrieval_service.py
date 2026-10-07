@@ -2,7 +2,7 @@ from typing import List, Optional, Dict, Tuple
 from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, and_, text
-from database.models import DocumentModel, DocumentChunkModel
+from database.models import DocumentModel, DocumentChunkModel, Vector
 from services.embedding_service import embedding_service
 
 DEFAULT_TOP_K = 5
@@ -10,6 +10,18 @@ MAX_TOP_K = 20
 DEFAULT_MIN_SIMILARITY = 0.20
 DEFAULT_VECTOR_WEIGHT = 0.7
 DEFAULT_KEYWORD_WEIGHT = 0.3
+
+# Detect retrieval mode at module load
+import logging
+logger = logging.getLogger(__name__)
+
+try:
+    from pgvector.sqlalchemy import Vector as PgVector
+    _RETRIEVAL_MODE = "pgvector"
+    logger.info(f"[RETRIEVAL] Using pgvector native cosine_distance for vector search")
+except Exception:
+    _RETRIEVAL_MODE = "python-fallback"
+    logger.info(f"[RETRIEVAL] Using Python-side cosine similarity fallback (SafeVector type)")
 
 
 class RetrievalService:
@@ -131,8 +143,9 @@ class RetrievalService:
                 .join(DocumentModel, DocumentChunkModel.document_id == DocumentModel.id)
             )
             vec_query_obj = self._apply_filters(vec_query_obj, clean_fy, clean_as_of_date)
-            all_chunks = vec_query_obj.limit(candidate_limit * 2).all()
-            
+            # Score ALL chunks passing filters (corpus is < 1000 rows), then sort and limit
+            all_chunks = vec_query_obj.all()
+
             vec_rows = []
             for chunk, doc in all_chunks:
                 if chunk.embedding:
@@ -251,6 +264,10 @@ class RetrievalService:
 
         # Sort deduplicated results by hybrid_score descending
         hybrid_results.sort(key=lambda x: x["hybrid_score"], reverse=True)
+
+        # Add retrieval mode metadata
+        for result in hybrid_results:
+            result["retrieval_mode"] = _RETRIEVAL_MODE
 
         return hybrid_results[:k]
 
