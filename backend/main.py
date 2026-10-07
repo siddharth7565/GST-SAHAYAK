@@ -543,10 +543,14 @@ def retrieval_search_endpoint(
         retrieved_chunks = [RetrievedChunk(**item) for item in results_data]
         top_k_val = request.top_k if request.top_k is not None else retrieval_service.default_top_k
 
+        # Include retrieval_mode in response if available
+        retrieval_mode = results_data[0].get("retrieval_mode") if results_data else None
+
         return RetrievalResponse(
             query=request.query.strip(),
             top_k=top_k_val,
             count=len(retrieved_chunks),
+            retrieval_mode=retrieval_mode,
             results=retrieved_chunks
         )
     except ValueError as exc:

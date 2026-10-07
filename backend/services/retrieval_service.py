@@ -25,6 +25,82 @@ except Exception:
     logger.info(f"[RETRIEVAL] Using Python-side cosine similarity fallback (SafeVector type)")
 
 
+def parse_chunk_label(text: str) -> Dict[str, Optional[str]]:
+    """
+    Parse chunk label line like "[CGST Act 2017, Section 22(1) - Persons liable for registration]"
+    Returns dict with act, section, sub, title, citation_label.
+    """
+    result = {
+        "act": None,
+        "section": None,
+        "sub": None,
+        "title": None,
+        "citation_label": None
+    }
+
+    # Extract label line (first line if it starts with '[')
+    lines = text.split('\n')
+    label_line = None
+    for line in lines:
+        line = line.strip()
+        if line.startswith('[') and ']' in line:
+            label_line = line
+            break
+
+    if not label_line:
+        return result
+
+    # Remove brackets
+    content = label_line.strip('[]')
+
+    # Pattern: "Act Name, Section X(Y) - Title"
+    # Examples:
+    # "CGST Act 2017, Section 22(1) - Persons liable for registration"
+    # "IGST Act 2017, Section 2(11) - Definitions"
+    # "CGST Act 2017, Section 16(4), part 1/2 - Eligibility and conditions for taking input tax credit"
+
+    # Extract act (everything before "Section")
+    if "Section" in content:
+        parts = content.split("Section", 1)
+        result["act"] = parts[0].strip().rstrip(', ')
+        section_part = parts[1].strip()
+    else:
+        return result
+
+    # Extract section number and subsection
+    # Pattern: "22(1)" or "22(1)-(3)" or "17A(1)" or "16(4), part 1/2"
+    section_match = re.match(r'(\d+[A-Za-z]?(?:\([^)]+\)(?:-\([^)]+\))*)?)', section_part)
+    if section_match:
+        full_section = section_match.group(1)
+        # Extract base section (e.g., "22" from "22(1)" or "17A" from "17A(1)")
+        base_section_match = re.match(r'(\d+[A-Za-z]?)', full_section)
+        if base_section_match:
+            result["section"] = base_section_match.group(1)
+        # Extract subsection (e.g., "(1)" or "(1)-(3)")
+        sub_match = re.search(r'\(([^)]+)\)(?:-\(([^)]+)\))?', full_section)
+        if sub_match:
+            if sub_match.group(2):
+                result["sub"] = f"({sub_match.group(1)})-({sub_match.group(2)})"
+            else:
+                result["sub"] = f"({sub_match.group(1)})"
+
+    # Extract title (after " - ")
+    if " - " in section_part:
+        title_part = section_part.split(" - ", 1)[1]
+        # Remove any "part X/Y" suffix for cleaner title
+        title_part = re.sub(r',\s*part\s+\d+/\d+\s*$', '', title_part, flags=re.IGNORECASE)
+        result["title"] = title_part.strip()
+
+    # Build citation label
+    if result["act"] and result["section"]:
+        citation = f"{result['act']}, Section {result['section']}"
+        if result["sub"]:
+            citation += result["sub"]
+        result["citation_label"] = citation
+
+    return result
+
+
 class RetrievalService:
     """
     Production Hybrid Retrieval Service layer for GST Sahayak.
@@ -241,6 +317,9 @@ class RetrievalService:
             # (Allow high keyword matches or high vector matches to pass)
             effective_similarity = max(v_score, hybrid_score)
             if effective_similarity >= threshold:
+                # Parse chunk label for metadata
+                label_info = parse_chunk_label(chunk.text)
+
                 hybrid_results.append({
                     "chunk_id": chunk.chunk_id,
                     "document_id": doc.id,
@@ -259,7 +338,12 @@ class RetrievalService:
                     "vector_score": v_score,
                     "keyword_score": kw_score,
                     "hybrid_score": hybrid_score,
-                    "retrieval_method": method
+                    "retrieval_method": method,
+                    # Add parsed label fields
+                    "act": label_info["act"],
+                    "section": label_info["section"],
+                    "sub": label_info["sub"],
+                    "citation_label": label_info["citation_label"]
                 })
 
         # Sort deduplicated results by hybrid_score descending

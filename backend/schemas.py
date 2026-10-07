@@ -494,6 +494,31 @@ class RetrievedChunk(BaseModel):
         description="Method that retrieved this chunk ('hybrid', 'vector_only', 'keyword_only').",
         example="hybrid"
     )
+    retrieval_mode: Optional[str] = Field(
+        default=None,
+        description="Retrieval mode used ('pgvector' or 'python-fallback').",
+        example="python-fallback"
+    )
+    act: Optional[str] = Field(
+        default=None,
+        description="Parsed Act name from chunk label (e.g., 'CGST Act 2017').",
+        example="CGST Act 2017"
+    )
+    section: Optional[str] = Field(
+        default=None,
+        description="Parsed section number from chunk label (e.g., '16' or '17A').",
+        example="16"
+    )
+    sub: Optional[str] = Field(
+        default=None,
+        description="Parsed subsection from chunk label (e.g., '(1)' or '(1)-(3)').",
+        example="(1)"
+    )
+    citation_label: Optional[str] = Field(
+        default=None,
+        description="Formatted citation label combining act, section, and subsection.",
+        example="CGST Act 2017, Section 16(1)"
+    )
 
 
 class RetrievalResponse(BaseModel):
@@ -511,6 +536,11 @@ class RetrievalResponse(BaseModel):
         ...,
         description="Actual number of relevant chunks returned after similarity threshold filtering.",
         example=3
+    )
+    retrieval_mode: Optional[str] = Field(
+        default=None,
+        description="Retrieval mode used ('pgvector' or 'python-fallback').",
+        example="python-fallback"
     )
     results: List[RetrievedChunk] = Field(
         ...,
