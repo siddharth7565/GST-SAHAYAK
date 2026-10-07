@@ -11,6 +11,7 @@ MAX_TOP_K = 20
 DEFAULT_MIN_SIMILARITY = 0.20
 DEFAULT_VECTOR_WEIGHT = 0.7
 DEFAULT_KEYWORD_WEIGHT = 0.3
+DEFAULT_SECTION_BOOST = 0.15  # Bonus for section-mention matches
 
 # Detect retrieval mode at module load
 import logging
@@ -97,6 +98,45 @@ def parse_chunk_label(text: str) -> Dict[str, Optional[str]]:
         if result["sub"]:
             citation += result["sub"]
         result["citation_label"] = citation
+
+    return result
+
+
+def extract_section_mentions(query: str) -> Dict[str, Optional[str]]:
+    """
+    Extract section mentions from query (e.g., "section 16", "sec 16", "s. 16", "section 16(2)").
+    Returns dict with section number and optional act.
+    """
+    result = {
+        "section": None,
+        "sub": None,
+        "act": None
+    }
+
+    query_lower = query.lower()
+
+    # Detect act mention (CGST/IGST)
+    if "cgst" in query_lower or "central" in query_lower:
+        result["act"] = "CGST Act 2017"
+    elif "igst" in query_lower or "integrated" in query_lower:
+        result["act"] = "IGST Act 2017"
+
+    # Detect section number with various prefixes
+    # Patterns: "section 16", "sec 16", "s. 16", "section 16(2)", "section 16(1)-(3)"
+    # Simplified: just extract section number and optionally subsection
+    section_match = re.search(r'(?:section|sec|s\.)\s*(\d+[A-Za-z]?)(?:\s*\(([^)]+)\))?', query_lower)
+    if not section_match:
+        section_match = re.search(r'(\d+[A-Za-z]?)(?:\s*\(([^)]+)\))?\s*(?:section|clause|provision)?', query_lower)
+
+    if section_match:
+        result["section"] = section_match.group(1)
+        if section_match.group(2):
+            # Check for range like (1)-(3)
+            sub_parts = section_match.group(2).split('-')
+            if len(sub_parts) > 1:
+                result["sub"] = f"({sub_parts[0]})-({sub_parts[1]})"
+            else:
+                result["sub"] = f"({section_match.group(2)})"
 
     return result
 
@@ -201,6 +241,9 @@ class RetrievalService:
         clean_fy = financial_year.strip() if (financial_year and financial_year.strip()) else None
 
         candidate_limit = k * 3
+
+        # Extract section mentions for boost
+        section_mentions = extract_section_mentions(clean_query)
 
         # ----------------------------------------------------
         # SEARCH METHOD 1: Dense Vector Similarity Search
@@ -313,13 +356,32 @@ class RetrievalService:
             # Compute combined hybrid score
             hybrid_score = round((vw * v_score) + (kw_w * kw_score), 4)
 
+            # Parse chunk label for metadata (needed for section boost)
+            label_info = parse_chunk_label(chunk.text)
+
+            # Apply section-mention boost if applicable
+            if section_mentions["section"]:
+                boost_applied = False
+                # Check section match
+                if label_info["section"] == section_mentions["section"]:
+                    # Check subsection match if specified
+                    if section_mentions["sub"]:
+                        if label_info["sub"] == section_mentions["sub"]:
+                            hybrid_score = round(min(1.0, hybrid_score + DEFAULT_SECTION_BOOST), 4)
+                            boost_applied = True
+                    else:
+                        # Section match without specific subsection
+                        hybrid_score = round(min(1.0, hybrid_score + DEFAULT_SECTION_BOOST), 4)
+                        boost_applied = True
+
+                # Check act match if specified
+                if not boost_applied and section_mentions["act"] and label_info["act"] == section_mentions["act"]:
+                    hybrid_score = round(min(1.0, hybrid_score + DEFAULT_SECTION_BOOST * 0.5), 4)
+
             # Filter out results below minimum threshold
             # (Allow high keyword matches or high vector matches to pass)
             effective_similarity = max(v_score, hybrid_score)
             if effective_similarity >= threshold:
-                # Parse chunk label for metadata
-                label_info = parse_chunk_label(chunk.text)
-
                 hybrid_results.append({
                     "chunk_id": chunk.chunk_id,
                     "document_id": doc.id,
