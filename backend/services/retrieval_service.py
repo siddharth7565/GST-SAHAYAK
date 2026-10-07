@@ -1,5 +1,6 @@
 from typing import List, Optional, Dict, Tuple
 from datetime import datetime
+import re
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, and_, text
 from database.models import DocumentModel, DocumentChunkModel, Vector
@@ -163,10 +164,26 @@ class RetrievalService:
         # ----------------------------------------------------
         # SEARCH METHOD 2: PostgreSQL Full-Text Keyword Search
         # ----------------------------------------------------
-        # Build text search query and rank using ts_rank_cd
+        # Build OR-style tsquery for better natural-language matching
+        # Parse query into terms and build OR query: term1 | term2 | term3
         ts_vector = func.to_tsvector("english", DocumentChunkModel.text)
-        ts_query = func.websearch_to_tsquery("english", clean_query)
-        kw_rank_expr = func.ts_rank_cd(ts_vector, ts_query)
+
+        # Split query into words, filter basic stopwords, join with | for OR semantics
+        # This is a simple approach; for production, consider using Python-side stopword removal
+        words = re.findall(r'\b\w+\b', clean_query.lower())
+        # Basic English stopwords to filter
+        basic_stopwords = {'a', 'an', 'the', 'and', 'or', 'in', 'of', 'to', 'for', 'is', 'are', 'was', 'were',
+                          'be', 'been', 'being', 'with', 'as', 'by', 'at', 'from', 'that', 'this', 'it', 'on'}
+        filtered_words = [w for w in words if w not in basic_stopwords and len(w) > 2]
+        if filtered_words:
+            or_query_str = ' | '.join(filtered_words)
+            ts_query = func.to_tsquery("english", or_query_str)
+        else:
+            # Fallback to plainto_tsquery if no meaningful terms
+            ts_query = func.plainto_tsquery("english", clean_query)
+
+        # Use ts_rank_cd with normalization flag 32 (rank/(rank+1)) to prevent score inflation
+        kw_rank_expr = func.ts_rank_cd(ts_vector, ts_query, 32)
 
         kw_query_obj = (
             db.query(DocumentChunkModel, DocumentModel, kw_rank_expr.label("rank"))
@@ -174,39 +191,22 @@ class RetrievalService:
         )
         kw_query_obj = self._apply_filters(kw_query_obj, clean_fy, clean_as_of_date)
 
-        # Apply phrase/keyword filter or ILIKE substring fallback if full-text query matches
-        kw_query_obj = kw_query_obj.filter(
-            or_(
-                ts_vector.op("@@")(ts_query),
-                DocumentChunkModel.text.ilike(f"%{clean_query}%")
-            )
-        )
+        # Filter by full-text match only (removed ILIKE fallback)
+        kw_query_obj = kw_query_obj.filter(ts_vector.op("@@")(ts_query))
         kw_rows = kw_query_obj.order_by(kw_rank_expr.desc()).limit(candidate_limit).all()
 
         keyword_candidates: Dict[str, Tuple[DocumentChunkModel, DocumentModel, float]] = {}
         for chunk, doc, rank_val in kw_rows:
-            raw_rank = float(rank_val) if rank_val is not None else 0.1
-            # If matched via ILIKE fallback, assign baseline rank
-            if raw_rank == 0.0 and clean_query.lower() in chunk.text.lower():
-                raw_rank = 0.1
+            raw_rank = float(rank_val) if rank_val is not None else 0.0
             keyword_candidates[chunk.chunk_id] = (chunk, doc, raw_rank)
 
         # ----------------------------------------------------
-        # SCORE NORMALIZATION (Min-Max scaling for Keyword Ranks)
+        # SCORE NORMALIZATION (No min-max; ts_rank_cd with normalization 32 already produces bounded scores)
         # ----------------------------------------------------
         norm_keyword_scores: Dict[str, float] = {}
-        if keyword_candidates:
-            raw_ranks = [item[2] for item in keyword_candidates.values()]
-            min_r = min(raw_ranks)
-            max_r = max(raw_ranks)
-            r_range = max_r - min_r
-
-            for cid, (chunk, doc, raw_r) in keyword_candidates.items():
-                if r_range > 0.0001:
-                    norm_score = round(0.2 + 0.8 * ((raw_r - min_r) / r_range), 4)
-                else:
-                    norm_score = 0.8
-                norm_keyword_scores[cid] = norm_score
+        for cid, (chunk, doc, raw_r) in keyword_candidates.items():
+            # ts_rank_cd with normalization 32 produces values in [0, 1), use directly
+            norm_keyword_scores[cid] = round(raw_r, 4)
 
         # ----------------------------------------------------
         # DEDUPLICATION & WEIGHTED HYBRID FUSION
