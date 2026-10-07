@@ -1,6 +1,7 @@
 from typing import List, Optional, Dict, Tuple
 from datetime import datetime
 import re
+from collections import defaultdict
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, and_, text
 from database.models import DocumentModel, DocumentChunkModel, Vector
@@ -12,6 +13,7 @@ DEFAULT_MIN_SIMILARITY = 0.20
 DEFAULT_VECTOR_WEIGHT = 0.7
 DEFAULT_KEYWORD_WEIGHT = 0.3
 DEFAULT_SECTION_BOOST = 0.15  # Bonus for section-mention matches
+DEFAULT_MAX_PER_SECTION = 3  # Max chunks from same (act, section) in results
 
 # Detect retrieval mode at module load
 import logging
@@ -411,11 +413,34 @@ class RetrievalService:
         # Sort deduplicated results by hybrid_score descending
         hybrid_results.sort(key=lambda x: x["hybrid_score"], reverse=True)
 
-        # Add retrieval mode metadata
+        # Apply diversity cap: limit chunks from same (act, section)
+        section_counts = defaultdict(int)
+        final_results = []
         for result in hybrid_results:
+            act = result.get("act") or "unknown"
+            section = result.get("section") or "unknown"
+            key = (act, section)
+
+            current_count = section_counts[key]
+            if current_count < DEFAULT_MAX_PER_SECTION:
+                final_results.append(result)
+                section_counts[key] = current_count + 1
+            # If we've hit the cap for this section, skip but keep looking for other sections
+
+        # If we couldn't fill top_k due to diversity cap, relax it
+        if len(final_results) < k and len(hybrid_results) > len(final_results):
+            # Add remaining results from capped sections until we reach k
+            for result in hybrid_results:
+                if len(final_results) >= k:
+                    break
+                if result not in final_results:
+                    final_results.append(result)
+
+        # Add retrieval mode metadata
+        for result in final_results:
             result["retrieval_mode"] = _RETRIEVAL_MODE
 
-        return hybrid_results[:k]
+        return final_results[:k]
 
     def search_similar_chunks(
         self,
