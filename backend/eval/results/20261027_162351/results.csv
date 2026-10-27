@@ -1,0 +1,221 @@
+﻿query_id,type,provider,model,llm_called,system_refused,success,error,latency_s,evidence_status,best_score,retrieval_recall,cited_sections,cited_recall,cited_precision,citations,invalid_citations,uncited_answer,unsupported_numbers,key_fact_hit,refused,expect_refusal,manual_correctness,answer
+q01_flagship,answerable,gemini,gemini-3.6-flash,True,False,False,"Gemini API call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",2.69,weak,0.4131,1.0,,,,,,False,,,False,False,,
+q02_threshold_local,answerable,gemini,gemini-3.6-flash,True,False,True,,10.59,weak,0.4659,1.0,CGST 2;CGST 22;CGST 24;IGST 12;IGST 8,1.0,0.2,S4;S6;S8;S2;S5;S3,,False,,1.0,False,False,,"### Threshold for GST Registration
+A supplier of services is liable to be registered in a State or Union territory (other than special category States) if their aggregate turnover in a financial year exceeds twenty lakh rupees [S4]. If the supplies are made from any of the special category States, the aggregate turnover threshold for mandatory registration is ten lakh rupees [S4][S6]. Aggregate turnover includes the aggregate value of all taxable supplies, exempt supplies, exports, and inter-State supplies computed on an all-India basis [S8].
+
+### Applicability to the Freelancer
+For services provided to clients within the same State, the transactions are treated as intra-State supplies where the location of the supplier and the place of supply are in the same State [S2][S5]. Based on the turnover of 15 lakh rupees:
+- **If located in a standard State:** The turnover of 15 lakh rupees does not exceed the twenty lakh rupees threshold, so registration is not required on the basis of turnover alone [S4].
+- **If located in a special category State:** The turnover of 15 lakh rupees exceeds the ten lakh rupees threshold, making GST registration mandatory [S4].
+
+### Compulsory Registration and Limitations
+Section 24 specifies cases where GST registration is compulsory regardless of turnover, such as persons making inter-State taxable supplies or those liable under reverse charge [S3]. 
+
+### Missing Information
+The available sources do not provide:
+- The specific State in which the freelancer is located to confirm whether it is a special category State [S4].
+- The remaining provisions of Section 24 beyond part 1, or any specific notifications regarding compulsory registration exemptions [S3].
+- Applicable GST rates, tax exemptions, or procedural rules for freelance design services."
+q03_itc_conditions,answerable,gemini,gemini-3.6-flash,True,False,True,,12.19,strong,0.9165,1.0,CGST 16,1.0,1.0,S1;S4;S8;S6;S7;S3;S5;S2,,False,180,,False,False,,"### Business Purpose and Registration
+A registered person is entitled to take input tax credit on supplies of goods or services (or both) that are used or intended to be used in the course or furtherance of business, which is credited to their electronic credit ledger [S1].
+
+### Primary Statutory Conditions
+No registered person is entitled to input tax credit unless all of the following conditions are met:
+* **Tax Document:** The person is in possession of a tax invoice, debit note issued by a registered supplier, or other prescribed tax-paying document [S4].
+* **Receipt of Goods or Services:** The person has received the goods or services [S4]. Receipt is deemed to occur when goods or services are delivered or provided to any person on the direction of and on account of the registered person [S8]. If goods are received in lots or instalments, credit is available upon receipt of the last lot or instalment [S6].
+* **Payment of Tax to Government:** The tax charged for the supply has been actually paid to the Government, either in cash or through utilization of admissible input tax credit [S6].
+* **Filing of Return:** The registered person has furnished the return under section 39 [S6].
+
+### Payment Condition to Supplier (180-Day Rule)
+For supplies other than reverse charge supplies, if the recipient fails to pay the supplier the value of supply plus tax within 180 days from the invoice date, an amount equal to the availed input tax credit is added to the recipient's output tax liability along with interest [S7]. The recipient can re-avail the credit upon making the payment [S7].
+
+### Restrictions and Time Limits
+* **Depreciation Restriction:** Input tax credit is not allowed on the tax component of capital goods and plant and machinery if depreciation on that tax component has been claimed under the Income-tax Act, 1961 [S3].
+* **Time Limit to Claim:** Input tax credit cannot be taken after the due date of furnishing the return under section 39 for the month of September following the end of the financial year to which the invoice or debit note pertains, or furnishing of the relevant annual return, whichever is earlier [S5]. For the financial year 2017-18, credit could be taken up to the due date of the return for March 2019 for invoices uploaded by the supplier by the specified March 2019 due date [S2]."
+q04_itc_depreciation,answerable,gemini,gemini-3.6-flash,True,False,True,,11.96,weak,0.588,1.0,,0.0,,,,False,,0.0,True,False,,I could not find sufficient supporting evidence in the available GST documents to answer this question.
+q05_voluntary,answerable,gemini,gemini-3.6-flash,True,False,True,,8.64,weak,0.4268,1.0,CGST 22;CGST 25,1.0,0.5,S6;S2;S7,,False,,1.0,False,False,,"### Voluntary GST Registration
+
+Yes, a person who is not liable to be registered under Section 22 or Section 24 may get themselves registered voluntarily [S6]. 
+
+Once registered voluntarily, all provisions of the CGST Act that apply to a registered person will apply to that person [S6].
+
+Under Section 22(1), a supplier is otherwise liable for registration if their aggregate turnover in a financial year exceeds twenty lakh rupees, or ten lakh rupees if making taxable supplies from special category States [S2]. 
+
+*Note: The exact procedure, forms, and specific documentation required to complete voluntary registration are not fully detailed in the provided sources [S6][S7].*"
+q06_not_liable,answerable,gemini,gemini-3.6-flash,True,False,True,,20.75,weak,0.5826,1.0,CGST 22;CGST 23;CGST 24,1.0,0.3333,S6;S2;S3;S1;S5,,False,,,False,False,,"### Persons Excluded under Section 23
+The following persons are not liable to registration:
+* Any person engaged exclusively in the business of supplying goods, services, or both that are not liable to tax or are wholly exempt from tax under the CGST Act or under the Integrated Goods and Services Tax Act [S6].
+* An agriculturist, to the extent of supply of produce out of cultivation of land [S6].
+* Categories of persons specified by notification by the Government on the recommendations of the Council [S6].
+
+### Persons Below Aggregate Turnover Thresholds
+* A supplier is liable to be registered only if their aggregate turnover in a financial year exceeds twenty lakh rupees [S2]. Suppliers whose aggregate turnover remains at or below this threshold are not liable to be registered under Section 22(1) [S2].
+* Where a supplier makes taxable supplies from any of the special category States, they are liable to be registered if their aggregate turnover exceeds ten lakh rupees [S2], unless enhanced by notification up to twenty lakh rupees [S3].
+* For a supplier engaged exclusively in the supply of goods, the threshold may be enhanced up to forty lakh rupees by notification [S3].
+* Note that these turnover exemptions do not apply if a person falls under mandatory registration requirements specified under Section 24, such as persons making inter-State taxable supplies or persons required to pay tax under reverse charge [S1][S5].
+
+### Limitations of Available Sources
+* The provided sources do not list the specific exemption notifications or specific exempted categories of persons issued by the Government under Section 23(2) [S6]."
+q07_zero_rated,answerable,gemini,gemini-3.6-flash,True,False,True,,14.47,weak,0.5757,1.0,IGST 13;IGST 16;IGST 2,1.0,0.3333,S1;S2;S3;S5;S4,,False,5,1.0,False,False,,"### Conditions for Export of Services
+A service supplied to a client outside India qualifies as an export of services if all five of the following criteria are met:
+1. The supplier of the service is located in India [S1].
+2. The recipient of the service is located outside India [S1].
+3. The place of supply of the service is outside India [S1]. Under the general rule for cross-border services, the place of supply is the location of the service recipient [S2]. However, specific exceptions apply, such as services performed in respect of goods physically made available by the recipient, where the place of supply is where the services are actually performed or where the goods are situated [S3].
+4. The payment for the service is received in convertible foreign exchange or in Indian rupees wherever permitted by the Reserve Bank of India [S1].
+5. The supplier and recipient are not merely establishments of a distinct person [S1].
+
+### Zero Rated Supply Provisions
+If the service constitutes a zero rated supply:
+- A registered person can supply the service without payment of integrated tax under a bond or Letter of Undertaking (LUT) and claim a refund of unutilized input tax credit [S5].
+- The Government may notify specific classes of persons or services that may make a zero rated supply on payment of integrated tax and claim a refund of the tax paid [S4].
+
+### Missing Information in Sources
+The available sources do not include:
+- Section 16(1) of the IGST Act, which contains the formal definition and scope of ""zero rated supply"".
+- Government notifications specifying the classes of persons or services eligible to export on payment of integrated tax under Section 16(4).
+- The complete list of place-of-supply exceptions under IGST Act Section 13(4) through 13(13)."
+q08_pos_outside_india,answerable,gemini,gemini-3.6-flash,True,False,True,,13.64,strong,0.7179,1.0,IGST 13,1.0,1.0,S2;S3,,False,,,False,False,,"### General Rule
+Section 13 applies to determine the place of supply of services when the location of the supplier or the location of the recipient is outside India [S2]. As a general rule, except for services specified in sub-sections (3) to (13) of section 13, the place of supply is the location of the recipient of services [S2]. If the location of the recipient of services is not available in the ordinary course of business, the place of supply is the location of the supplier of services [S2].
+
+### Services Supplied in Respect of Goods
+For services supplied in respect of goods that are required to be made physically available by the recipient of services to the supplier (or to a person acting on behalf of the supplier) to provide the services, the place of supply is the location where the services are actually performed [S3]. When such services are provided from a remote location by electronic means, the place of supply is the location where the goods are situated at the time of supply of services [S3].
+
+### Missing Information
+The provided sources do not contain the specific provisions for sub-sections (4) through (13) of Section 13 of the IGST Act [S2]."
+q09_interstate,answerable,gemini,gemini-3.6-flash,True,False,False,"Gemini API call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",4.34,strong,0.6664,1.0,,,,,,False,,,False,False,,
+q10_time_of_supply,answerable,gemini,gemini-3.6-flash,True,False,True,,10.68,weak,0.5912,1.0,CGST 13,1.0,1.0,S1;S4,,False,,,False,False,,"### General Liability
+The liability to pay tax on services arises at the time of supply, as determined in accordance with the provisions of Section 13 of the CGST Act [S1].
+
+### Time of Supply in Specific Circumstances
+* **Vouchers**: In the case of a supply of vouchers by a supplier, the time of supply is:
+  * The date of issue of the voucher, if the supply is identifiable at that point [S4]; or
+  * The date of redemption of the voucher, in all other cases [S4].
+* **Residual Provision**: If it is not possible to determine the time of supply under sub-section (2), (3), or (4) of Section 13, the time of supply is:
+  * The date on which a periodical return is to be filed, in a case where such return has to be filed [S4]; or
+  * The date on which the tax is paid, in any other case [S4].
+* **Interest, Late Fees, or Penalties for Delayed Payment**: For an addition in the value of supply by way of interest, late fee, or penalty for delayed payment of any consideration, the time of supply is the date on which the supplier receives such addition in value [S4].
+
+### Missing Information
+The provided sources do not include Section 13(2) (which governs the standard time of supply based on the invoice date or date of payment) or Section 13(3) (which governs the time of supply under reverse charge mechanism). Therefore, the general rules for standard service transactions and reverse charge scenarios are not covered by the available documents."
+q11_tax_invoice,answerable,gemini,gemini-3.6-flash,True,False,True,,15.78,strong,0.7239,1.0,CGST 31,1.0,1.0,S1;S2,,False,,,False,False,,"### Timing of Tax Invoice Issuance
+
+A registered person supplying taxable services must issue a tax invoice before or after the provision of service, but within a prescribed period [S1]. 
+
+The Government may, on the recommendations of the Council, specify by notification categories of services where a tax invoice must be issued within a prescribed time and manner, where another document is deemed to be a tax invoice, or where a tax invoice may not be issued [S1]. 
+
+Additionally, a registered person liable to pay tax under sub-section (3) or sub-section (4) of section 9 must issue an invoice for goods or services received from an unregistered supplier on the date of receipt [S2]. If an advance payment is received and a receipt voucher is issued, but no supply is made and no tax invoice is subsequently issued, the registered person may issue a refund voucher [S2].
+
+*Missing Information:* The provided sources do not specify the exact duration or number of days that constitutes the ""prescribed period"" for issuing an invoice after service provision.
+
+---
+
+### Contents of a Tax Invoice
+
+A tax invoice issued for taxable services must show [S1]:
+* The description of the service [S1]
+* The value of the service [S1]
+* The tax charged thereon [S1]
+* Such other particulars as may be prescribed [S1]
+
+*Missing Information:* The provided sources do not list the specific additional prescribed particulars required to be shown on the tax invoice beyond the description, value, and tax charged."
+q12_value_of_supply,answerable,gemini,gemini-3.6-flash,True,False,True,,7.79,weak,0.6003,1.0,CGST 15;CGST 9,1.0,0.5,S1;S6;S2,,False,,1.0,False,False,,"### Transaction Value
+The value of a supply of goods or services or both is the transaction value, which is the price actually paid or payable for the supply, provided the supplier and the recipient are not related and the price is the sole consideration for the supply [S1]. Intra-State supplies are taxed on the value determined under section 15 [S6].
+
+### Exclusion of Discounts
+The value of supply shall not include any discount given:
+* Before or at the time of the supply, provided the discount has been duly recorded in the invoice issued for that supply [S2].
+* After the supply has been effected, provided the discount is established in terms of an agreement entered into at or before the time of supply, is specifically linked to relevant invoices, and input tax credit attributable to the discount has been reversed by the recipient [S2].
+
+### Determination when Transaction Value Cannot be Applied
+If the value of the supply cannot be determined as the transaction value under section 15(1), it shall be determined in such manner as may be prescribed [S2].
+
+### Limitations in the Available Sources
+The available sources do not include the specific valuation rules or prescribed methods for cases where parties are related or where price is not the sole consideration, nor do they detail statutory inclusions/additions to the value under Section 15(2)."
+q13_returns,answerable,gemini,gemini-3.6-flash,True,False,True,,12.03,weak,0.3732,1.0,CGST 37;CGST 39,1.0,1.0,S6;S7;S8,,False,,,False,False,,"### Filing Requirement for Tax Periods
+A registered person who is required to furnish a return must furnish a return for every tax period, regardless of whether any supplies of goods or services were made during that tax period [S6].
+
+### Details of Supplies
+Details of outward supplies that must be furnished include invoices, debit notes, credit notes, and revised invoices issued in relation to outward supplies during the tax period [S7]. 
+
+A registered person who has been communicated details pertaining to inward supplies or Input Service Distributor details must accept or reject those details on or before the seventeenth day, but not before the fifteenth day, of the month succeeding the tax period [S8].
+
+### Missing Information
+The provided sources do not contain:
+- Specific GST return form names or numbers (such as GSTR-1, GSTR-3B, or GSTR-4) required for freelancers.
+- Specific filing frequencies, due dates, or exemptions tailored specifically to freelancers or service providers."
+q14_reverse_charge,answerable,gemini,gemini-3.6-flash,True,False,True,,19.83,weak,0.4617,1.0,CGST 2;CGST 24;CGST 9;IGST 2;IGST 5,1.0,0.2,S3;S1;S4;S2;S7;S8,,False,,,False,False,,"### Definition of Reverse Charge
+Reverse charge means the liability to pay tax by the recipient of a supply of goods or services (or both) instead of the supplier [S3].
+
+### Specified Categories of Supplies
+GST is payable under reverse charge by the recipient for categories of supply of goods or services (or both) specified by the Government by notification on the recommendations of the Council [S1][S4].
+
+### Supplies Received from Unregistered Suppliers
+GST is payable under reverse charge by a recipient who belongs to a specified class of registered persons, in respect of specified categories of goods or services (or both) received from an unregistered supplier, as specified by notification [S2]. 
+
+### Compulsory Registration Requirement
+Persons who are required to pay tax under reverse charge are subject to compulsory registration under the CGST Act [S7].
+
+### Information Not Covered in the Sources
+The provided sources do not include:
+- The specific notifications, lists, or categories of goods and services subject to reverse charge under Section 9(3) or Section 5(3).
+- The specific classes of registered persons or specified categories of goods/services subject to reverse charge from unregistered suppliers under Section 5(4) or Section 9(4).
+- Notification details or explicit rules applying reverse charge specifically to the import of services, although the definition of import of services is provided [S8]."
+q15_weather,out_of_scope,gemini,-,False,True,True,,0.0,insufficient,0.2251,,,,,,,False,,,True,True,,I could not find sufficient supporting evidence in the available GST documents to answer this question.
+q16_income_tax,out_of_scope,gemini,gemini-3.6-flash,True,False,True,,5.25,weak,0.4241,,,,,,,False,,,True,True,,I could not find sufficient supporting evidence in the available GST documents to answer this question.
+q17_mutual_funds,out_of_scope,gemini,-,False,True,True,,0.0,insufficient,0.2283,,,,,,,False,,,True,True,,I could not find sufficient supporting evidence in the available GST documents to answer this question.
+q18_rate_borderline,borderline,gemini,gemini-3.6-flash,True,False,True,,18.28,weak,0.2715,,,,,,,False,,,True,True,,I could not find sufficient supporting evidence in the available GST documents to answer this question.
+q19_heldout_foreign_invoice,answerable,gemini,gemini-3.6-flash,True,False,True,,14.24,weak,0.4395,1.0,CGST 31;IGST 13;IGST 16;IGST 2,1.0,0.5,S6;S1;S2;S3;S4,,False,,,False,False,,"### Export of Services and Zero-Rated Supply
+An export of services is classified as a zero-rated supply [S6]. To qualify as an export of services, a supply must meet all five of the following conditions:
+1. The supplier of service is located in India [S1].
+2. The recipient of service is located outside India [S1].
+3. The place of supply of service is outside India [S1].
+4. Payment for the service is received by the supplier in convertible foreign exchange, or in Indian rupees wherever permitted by the Reserve Bank of India [S1].
+5. The supplier and recipient are not merely establishments of a distinct person [S1].
+
+Input tax credit may be availed for making zero-rated supplies [S6].
+
+### Place of Supply
+When the location of the supplier or the recipient is outside India, the place of supply of services is generally the location of the recipient of services [S2]. If the location of the recipient is not available in the ordinary course of business, the place of supply is the location of the supplier [S2]. 
+
+For services supplied in respect of goods that are required to be made physically available by the recipient to the supplier (or a person acting on their behalf), the place of supply is the location where the services are actually performed [S3]. If such services are provided from a remote location by electronic means, the place of supply is the location where the goods are situated at the time of supply [S3].
+
+### Invoicing Requirements
+A registered person supplying taxable services is required to issue a tax invoice showing the description, value, tax charged thereon, and other prescribed particulars [S4].
+
+### Missing Information
+The available sources do not contain information regarding:
+* The specific tax rates applicable to different services.
+* Mandatory GST registration threshold limits for freelancers.
+* The specific rules or procedures (such as executing a Letter of Undertaking (LUT) versus paying IGST and claiming a refund) that dictate whether tax must be charged on the invoice for zero-rated supplies."
+q20_heldout_no_gst_number,answerable,gemini,gemini-3.6-flash,True,False,True,,23.44,weak,0.2512,1.0,CGST 2;CGST 22;CGST 23;CGST 24;CGST 25,1.0,0.4,S2;S4;S3;S1;S5;S8;S7,,False,,,False,False,,"### Turnover Thresholds
+A supplier is liable to obtain a GST registration if their aggregate turnover in a financial year exceeds twenty lakh rupees, or ten lakh rupees if making supplies from special category States [S2]. Aggregate turnover includes the aggregate value of all taxable supplies, exempt supplies, exports of goods or services, and inter-State supplies under the same Permanent Account Number (PAN) [S4]. The threshold may be enhanced by the Government up to forty lakh rupees only for suppliers engaged exclusively in the supply of goods [S3]. Therefore, if your aggregate turnover is below the applicable threshold limit, you are generally not required to register under this threshold provision [S2].
+
+### Mandatory Registration Conditions
+Regardless of your aggregate turnover limit, registration is compulsory if you engage in specific activities, including:
+* Making any inter-State taxable supply [S1].
+* Paying tax under reverse charge [S1].
+* Supplying goods or services through an electronic commerce operator who is required to collect tax at source under section 52 [S5].
+* Operating as a casual taxable person or a non-resident taxable person making taxable supplies [S1].
+
+### Wholly Exempt or Non-Taxable Supplies
+You are not liable to obtain GST registration if you are engaged exclusively in the business of supplying goods or services that are not liable to tax or are wholly exempt from tax under the GST Acts [S8]. 
+
+### Voluntary Registration
+If you are not otherwise liable to register under the turnover thresholds or compulsory criteria, you may still choose to get registered voluntarily [S7]. If you register voluntarily, all provisions of the CGST Act that apply to a registered person will apply to you [S7].
+
+### Missing Information
+The provided sources do not include specific exemption notifications that may exempt certain small service providers making inter-State supplies or e-commerce supplies from compulsory registration [S8]. The sources also do not contain information regarding applicable GST rates, export procedures, or specific list of exempt freelancing services."
+q21_heldout_who_pays,answerable,gemini,gemini-3.6-flash,True,False,True,,22.53,weak,0.3005,1.0,CGST 2;CGST 31;CGST 9;IGST 5,1.0,0.25,S4;S6;S1;S5;S8;S2,,False,,,False,False,,"### Reverse Charge Liability (Client Pays)
+When a specified registered person (client) receives specified categories of goods or services from an unregistered supplier, the client is liable to pay tax on a reverse charge basis as the recipient [S4]. In such cases, the registered client who is liable under reverse charge must issue an invoice for the goods or services received from the unregistered supplier [S6] and must issue a payment voucher at the time of making payment to the supplier [S1].
+
+### Electronic Commerce Operator Liability
+If services are supplied through an electronic commerce operator (ECO), the Government may specify categories of intra-State or inter-State services where the tax must be paid by the ECO rather than the individual supplier [S5][S8]. If the ECO does not have a physical presence in the taxable territory, any person representing the ECO in that territory is liable to pay the tax [S5][S8].
+
+### Recipient Definition
+The ""recipient"" of a supply of services is defined as the person liable to pay consideration (where consideration is payable), or the person to whom the service is rendered (where no consideration is payable), including an agent acting on behalf of the recipient [S2].
+
+### What the Sources Do Not Cover
+The provided sources only partly answer who pays GST because they do not contain:
+- The standard forward charge provisions establishing when a freelancer (supplier) is directly liable to collect and pay GST.
+- Notifications specifying which exact freelance service categories fall under reverse charge [S4] or ECO liability [S5][S8].
+- GST registration thresholds, applicable tax rates, or exemption notifications for freelancers."

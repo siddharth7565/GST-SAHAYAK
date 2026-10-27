@@ -1,0 +1,742 @@
+{
+  "per_query": [
+    {
+      "query_id": "q01_flagship",
+      "type": "answerable",
+      "query": "I'm a freelance graphic designer in Delhi, earning 15 lakh/year, half from Indian clients and half from a US client. Do I need GST registration, and what applies to each income source?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.4131,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "I'm a freelance graphic designer in Delhi, earning 15 lakh/year, half from Indian clients and half from a US client. Do I need GST registration, and what applies to each income source?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)",
+        "export of services zero rated supply IGST Section 16",
+        "place of supply of services where location of recipient is outside India IGST Section 13",
+        "export of services means supply of any service supplier located in India recipient outside India payment received in convertible foreign exchange IGST Section 2(6)"
+      ],
+      "retrieved_sections": [
+        "IGST 2",
+        "IGST 13",
+        "IGST 13",
+        "CGST 24",
+        "CGST 22",
+        "CGST 22",
+        "CGST 2",
+        "IGST 16"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 2(6)",
+        "IGST Act 2017, Section 13(1)-(2)",
+        "IGST Act 2017, Section 13(3)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 2(6)",
+        "IGST Act 2017, Section 16(1)-(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q02_threshold_local",
+      "type": "answerable",
+      "query": "Does a freelance designer whose clients are all in the same state and who earns 15 lakh a year need GST registration?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.4659,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Does a freelance designer whose clients are all in the same state and who earns 15 lakh a year need GST registration?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)",
+        "place of supply of services where location of supplier and recipient is in India IGST Section 12",
+        "intra-State supply location of supplier and place of supply in same State IGST Section 8",
+        "levy of central tax and State tax on intra-State supplies CGST Section 9"
+      ],
+      "retrieved_sections": [
+        "IGST 12",
+        "IGST 12",
+        "CGST 24",
+        "CGST 22",
+        "IGST 8",
+        "CGST 22",
+        "IGST 13",
+        "CGST 2"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 12(11)",
+        "IGST Act 2017, Section 12(1)-(2)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "IGST Act 2017, Section 8(2)",
+        "CGST Act 2017, Section 22(1)",
+        "IGST Act 2017, Section 13(1)-(2)",
+        "CGST Act 2017, Section 2(6)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q03_itc_conditions",
+      "type": "answerable",
+      "query": "What are the conditions for claiming input tax credit under Section 16?",
+      "expect_refusal": false,
+      "evidence_status": "strong",
+      "best_score": 0.9165,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "What are the conditions for claiming input tax credit under Section 16?",
+        "registered person entitled to take credit of input tax conditions tax invoice receipt of services CGST Section 16",
+        "input tax credit not available blocked credits personal consumption CGST Section 17"
+      ],
+      "retrieved_sections": [
+        "CGST 16",
+        "CGST 16",
+        "CGST 16",
+        "CGST 16",
+        "CGST 16",
+        "CGST 16",
+        "CGST 16",
+        "CGST 16"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 16(1)",
+        "CGST Act 2017, Section 16(4)",
+        "CGST Act 2017, Section 16(3)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 16(4)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 16(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q04_itc_depreciation",
+      "type": "answerable",
+      "query": "I claimed depreciation on the GST part of a capital asset. Can I still take input tax credit on that part?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.588,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "I claimed depreciation on the GST part of a capital asset. Can I still take input tax credit on that part?",
+        "registered person entitled to take credit of input tax conditions tax invoice receipt of services CGST Section 16",
+        "input tax credit not available blocked credits personal consumption CGST Section 17"
+      ],
+      "retrieved_sections": [
+        "CGST 16",
+        "CGST 16",
+        "CGST 17",
+        "CGST 31",
+        "CGST 17",
+        "CGST 18",
+        "CGST 18",
+        "CGST 31"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 17(4)",
+        "CGST Act 2017, Section 31(3)",
+        "CGST Act 2017, Section 17(5)",
+        "CGST Act 2017, Section 18(1)",
+        "CGST Act 2017, Section 18(2)-(3)",
+        "CGST Act 2017, Section 31(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q05_voluntary",
+      "type": "answerable",
+      "query": "Can I register for GST voluntarily even if my turnover is below the threshold?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.4268,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Can I register for GST voluntarily even if my turnover is below the threshold?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)",
+        "person not liable to be registered may get himself registered voluntarily CGST Section 25(3)"
+      ],
+      "retrieved_sections": [
+        "CGST 24",
+        "CGST 22",
+        "CGST 22",
+        "CGST 2",
+        "CGST 24",
+        "CGST 25",
+        "CGST 25",
+        "CGST 23"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 2(6)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 25(2)-(3)",
+        "CGST Act 2017, Section 25(7)-(8)",
+        "CGST Act 2017, Section 23(1)-(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q06_not_liable",
+      "type": "answerable",
+      "query": "Which persons are not liable to be registered under GST?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.5826,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Which persons are not liable to be registered under GST?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)",
+        "persons not liable for registration CGST Section 23"
+      ],
+      "retrieved_sections": [
+        "CGST 24",
+        "CGST 22",
+        "CGST 22",
+        "CGST 2",
+        "CGST 24",
+        "CGST 23",
+        "CGST 25",
+        "CGST 25"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 2(6)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 23(1)-(2)",
+        "CGST Act 2017, Section 25(7)-(8)",
+        "CGST Act 2017, Section 25(2)-(3)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q07_zero_rated",
+      "type": "answerable",
+      "query": "Is a service I supply to a client outside India treated as a zero rated supply?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.5757,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Is a service I supply to a client outside India treated as a zero rated supply?",
+        "export of services zero rated supply IGST Section 16",
+        "place of supply of services where location of recipient is outside India IGST Section 13",
+        "export of services means supply of any service supplier located in India recipient outside India payment received in convertible foreign exchange IGST Section 2(6)",
+        "zero rated supply export of services refund of integrated tax IGST Section 16",
+        "supply without payment of integrated tax under bond or letter of undertaking IGST Section 16(3)"
+      ],
+      "retrieved_sections": [
+        "IGST 2",
+        "IGST 13",
+        "IGST 13",
+        "IGST 16",
+        "IGST 16",
+        "IGST 12",
+        "IGST 12",
+        "IGST 2"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 2(6)",
+        "IGST Act 2017, Section 13(1)-(2)",
+        "IGST Act 2017, Section 13(3)",
+        "IGST Act 2017, Section 16(4)",
+        "IGST Act 2017, Section 16(3)",
+        "IGST Act 2017, Section 12(1)-(2)",
+        "IGST Act 2017, Section 12(11)",
+        "IGST Act 2017, Section 2(11)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q08_pos_outside_india",
+      "type": "answerable",
+      "query": "What is the place of supply of my services when the client is located outside India?",
+      "expect_refusal": false,
+      "evidence_status": "strong",
+      "best_score": 0.7179,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "What is the place of supply of my services when the client is located outside India?",
+        "export of services zero rated supply IGST Section 16",
+        "place of supply of services where location of recipient is outside India IGST Section 13",
+        "export of services means supply of any service supplier located in India recipient outside India payment received in convertible foreign exchange IGST Section 2(6)",
+        "place of supply of services IGST Section 12",
+        "place of supply of services outside India IGST Section 13"
+      ],
+      "retrieved_sections": [
+        "IGST 2",
+        "IGST 13",
+        "IGST 13",
+        "IGST 16",
+        "IGST 12",
+        "IGST 12",
+        "IGST 2",
+        "IGST 16"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 2(6)",
+        "IGST Act 2017, Section 13(1)-(2)",
+        "IGST Act 2017, Section 13(3)",
+        "IGST Act 2017, Section 16(1)-(2)",
+        "IGST Act 2017, Section 12(1)-(2)",
+        "IGST Act 2017, Section 12(11)",
+        "IGST Act 2017, Section 2(11)",
+        "IGST Act 2017, Section 16(4)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q09_interstate",
+      "type": "answerable",
+      "query": "When is a supply treated as an inter-State supply?",
+      "expect_refusal": false,
+      "evidence_status": "strong",
+      "best_score": 0.6664,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "When is a supply treated as an inter-State supply?",
+        "inter-State supply location of supplier and place of supply in different States IGST Section 7",
+        "persons making inter-State taxable supply compulsory registration CGST Section 24",
+        "levy of integrated tax on inter-State supplies IGST Section 5"
+      ],
+      "retrieved_sections": [
+        "CGST 24",
+        "IGST 7",
+        "IGST 7",
+        "IGST 5",
+        "CGST 24",
+        "IGST 5",
+        "IGST 8",
+        "IGST 2"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 24",
+        "IGST Act 2017, Section 7(3)-(4)",
+        "IGST Act 2017, Section 7(1)-(2)",
+        "IGST Act 2017, Section 5(1)",
+        "CGST Act 2017, Section 24",
+        "IGST Act 2017, Section 5(2)-(3)",
+        "IGST Act 2017, Section 8(2)",
+        "IGST Act 2017, Section 2(15)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q10_time_of_supply",
+      "type": "answerable",
+      "query": "When does my liability to pay GST on services arise, i.e. what is the time of supply?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.5912,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "When does my liability to pay GST on services arise, i.e. what is the time of supply?",
+        "time of supply of services liability to pay tax arises CGST Section 13",
+        "levy and collection of central goods and services tax on supply CGST Section 9",
+        "scope of supply CGST Section 7"
+      ],
+      "retrieved_sections": [
+        "CGST 13",
+        "CGST 9",
+        "CGST 9",
+        "CGST 13",
+        "CGST 7",
+        "CGST 7",
+        "CGST 15",
+        "CGST 2"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 13(1)",
+        "CGST Act 2017, Section 9(3)",
+        "CGST Act 2017, Section 9(1)-(2)",
+        "CGST Act 2017, Section 13(4)-(6)",
+        "CGST Act 2017, Section 7(1)-(1A)",
+        "CGST Act 2017, Section 7(2)-(3)",
+        "CGST Act 2017, Section 15(2)",
+        "CGST Act 2017, Section 2(62)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q11_tax_invoice",
+      "type": "answerable",
+      "query": "When must I issue a tax invoice for my services and what must it contain?",
+      "expect_refusal": false,
+      "evidence_status": "strong",
+      "best_score": 0.7239,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "When must I issue a tax invoice for my services and what must it contain?",
+        "tax invoice issued by registered person supplying taxable services CGST Section 31"
+      ],
+      "retrieved_sections": [
+        "CGST 31",
+        "CGST 31",
+        "CGST 24",
+        "CGST 37",
+        "CGST 16",
+        "CGST 2",
+        "CGST 2",
+        "CGST 9"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 31(2)",
+        "CGST Act 2017, Section 31(3)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 37(1)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 2(62)",
+        "CGST Act 2017, Section 2(61)",
+        "CGST Act 2017, Section 9(5)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q12_value_of_supply",
+      "type": "answerable",
+      "query": "How is the value of my taxable supply determined for GST?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.6003,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "How is the value of my taxable supply determined for GST?"
+      ],
+      "retrieved_sections": [
+        "CGST 15",
+        "CGST 15",
+        "CGST 13",
+        "CGST 18",
+        "CGST 18",
+        "CGST 9",
+        "CGST 31",
+        "CGST 16"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 15(1)",
+        "CGST Act 2017, Section 15(3)-(4)",
+        "CGST Act 2017, Section 13(4)-(6)",
+        "CGST Act 2017, Section 18(1)",
+        "CGST Act 2017, Section 18(5)-(6)",
+        "CGST Act 2017, Section 9(1)-(2)",
+        "CGST Act 2017, Section 31(1)",
+        "CGST Act 2017, Section 16(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q13_returns",
+      "type": "answerable",
+      "query": "Which returns must a registered freelancer file for GST?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.3732,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Which returns must a registered freelancer file for GST?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)",
+        "furnishing details of outward supplies CGST Section 37",
+        "furnishing of returns CGST Section 39"
+      ],
+      "retrieved_sections": [
+        "CGST 24",
+        "CGST 22",
+        "CGST 22",
+        "CGST 2",
+        "CGST 24",
+        "CGST 39",
+        "CGST 37",
+        "CGST 37"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 2(6)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 39(8)",
+        "CGST Act 2017, Section 37(3)",
+        "CGST Act 2017, Section 37(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q14_reverse_charge",
+      "type": "answerable",
+      "query": "When is GST payable under reverse charge?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.4617,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "When is GST payable under reverse charge?",
+        "liability to pay tax on reverse charge basis CGST Section 9(3)",
+        "import of services reverse charge integrated tax IGST Section 5"
+      ],
+      "retrieved_sections": [
+        "IGST 5",
+        "IGST 5",
+        "CGST 2",
+        "CGST 9",
+        "CGST 2",
+        "CGST 16",
+        "CGST 24",
+        "IGST 2"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 5(2)-(3)",
+        "IGST Act 2017, Section 5(4)",
+        "CGST Act 2017, Section 2(98)",
+        "CGST Act 2017, Section 9(3)",
+        "CGST Act 2017, Section 2(62)",
+        "CGST Act 2017, Section 16(2)",
+        "CGST Act 2017, Section 24",
+        "IGST Act 2017, Section 2(11)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q15_weather",
+      "type": "out_of_scope",
+      "query": "What is the weather in Delhi today?",
+      "expect_refusal": true,
+      "evidence_status": "insufficient",
+      "best_score": 0.2251,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "What is the weather in Delhi today?"
+      ],
+      "retrieved_sections": [
+        "CGST 2",
+        "CGST 2",
+        "IGST 2",
+        "IGST 13",
+        "IGST 12",
+        "IGST 12",
+        "IGST 13",
+        "CGST 13"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 2(56)",
+        "CGST Act 2017, Section 2(27)",
+        "IGST Act 2017, Section 2(4)",
+        "IGST Act 2017, Section 13(7)",
+        "IGST Act 2017, Section 12(11)",
+        "IGST Act 2017, Section 12(14)",
+        "IGST Act 2017, Section 13(3)",
+        "CGST Act 2017, Section 13(3)"
+      ],
+      "retrieval_recall": null
+    },
+    {
+      "query_id": "q16_income_tax",
+      "type": "out_of_scope",
+      "query": "How do I file my income tax return and claim 80C deductions?",
+      "expect_refusal": true,
+      "evidence_status": "weak",
+      "best_score": 0.4241,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "How do I file my income tax return and claim 80C deductions?"
+      ],
+      "retrieved_sections": [
+        "CGST 39",
+        "CGST 39",
+        "CGST 37",
+        "CGST 25",
+        "CGST 16",
+        "CGST 16",
+        "CGST 2",
+        "CGST 2"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 39(2)-(3)",
+        "CGST Act 2017, Section 39(7)",
+        "CGST Act 2017, Section 37(3)",
+        "CGST Act 2017, Section 25(6)",
+        "CGST Act 2017, Section 16(3)",
+        "CGST Act 2017, Section 16(4)",
+        "CGST Act 2017, Section 2(117)",
+        "CGST Act 2017, Section 2(62)"
+      ],
+      "retrieval_recall": null
+    },
+    {
+      "query_id": "q17_mutual_funds",
+      "type": "out_of_scope",
+      "query": "Which mutual fund should I invest in for retirement?",
+      "expect_refusal": true,
+      "evidence_status": "insufficient",
+      "best_score": 0.2283,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Which mutual fund should I invest in for retirement?"
+      ],
+      "retrieved_sections": [
+        "CGST 2"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 2(51)"
+      ],
+      "retrieval_recall": null
+    },
+    {
+      "query_id": "q18_rate_borderline",
+      "type": "borderline",
+      "query": "What is the GST rate on graphic design services?",
+      "expect_refusal": true,
+      "evidence_status": "insufficient",
+      "best_score": 0.2715,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "What is the GST rate on graphic design services?",
+        "levy and collection of central goods and services tax on supply CGST Section 9",
+        "scope of supply CGST Section 7"
+      ],
+      "retrieved_sections": [
+        "CGST 9",
+        "CGST 9",
+        "CGST 7",
+        "CGST 7",
+        "CGST 15",
+        "CGST 2",
+        "CGST 31",
+        "IGST 5"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 9(3)",
+        "CGST Act 2017, Section 9(1)-(2)",
+        "CGST Act 2017, Section 7(1)-(1A)",
+        "CGST Act 2017, Section 7(2)-(3)",
+        "CGST Act 2017, Section 15(2)",
+        "CGST Act 2017, Section 2(62)",
+        "CGST Act 2017, Section 31(1)",
+        "IGST Act 2017, Section 5(1)"
+      ],
+      "retrieval_recall": null
+    },
+    {
+      "query_id": "q19_heldout_foreign_invoice",
+      "type": "answerable",
+      "query": "Do I need to charge GST when invoicing a foreign client?",
+      "expect_refusal": false,
+      "evidence_status": "weak",
+      "best_score": 0.4395,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Do I need to charge GST when invoicing a foreign client?",
+        "export of services zero rated supply IGST Section 16",
+        "place of supply of services where location of recipient is outside India IGST Section 13",
+        "export of services means supply of any service supplier located in India recipient outside India payment received in convertible foreign exchange IGST Section 2(6)",
+        "tax invoice issued by registered person supplying taxable services CGST Section 31"
+      ],
+      "retrieved_sections": [
+        "IGST 2",
+        "IGST 13",
+        "IGST 13",
+        "CGST 31",
+        "CGST 31",
+        "IGST 16",
+        "IGST 12",
+        "IGST 12"
+      ],
+      "retrieved_labels": [
+        "IGST Act 2017, Section 2(6)",
+        "IGST Act 2017, Section 13(1)-(2)",
+        "IGST Act 2017, Section 13(3)",
+        "CGST Act 2017, Section 31(2)",
+        "CGST Act 2017, Section 31(3)",
+        "IGST Act 2017, Section 16(1)-(2)",
+        "IGST Act 2017, Section 12(1)-(2)",
+        "IGST Act 2017, Section 12(11)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q20_heldout_no_gst_number",
+      "type": "answerable",
+      "query": "Can I freelance without a GST number?",
+      "expect_refusal": false,
+      "evidence_status": "insufficient",
+      "best_score": 0.2512,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Can I freelance without a GST number?",
+        "every supplier liable to be registered if aggregate turnover exceeds twenty lakh rupees CGST Section 22",
+        "persons required to be registered compulsory registration inter-State taxable supply CGST Section 24",
+        "aggregate turnover means aggregate value of all taxable supplies exempt supplies exports CGST Section 2(6)"
+      ],
+      "retrieved_sections": [
+        "CGST 24",
+        "CGST 22",
+        "CGST 22",
+        "CGST 2",
+        "CGST 24",
+        "CGST 25",
+        "CGST 25",
+        "CGST 23"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 22(1)",
+        "CGST Act 2017, Section 2(6)",
+        "CGST Act 2017, Section 24",
+        "CGST Act 2017, Section 25(7)-(8)",
+        "CGST Act 2017, Section 25(2)-(3)",
+        "CGST Act 2017, Section 23(1)-(2)"
+      ],
+      "retrieval_recall": 1.0
+    },
+    {
+      "query_id": "q21_heldout_who_pays",
+      "type": "answerable",
+      "query": "Who pays GST: the freelancer or the client?",
+      "expect_refusal": false,
+      "evidence_status": "insufficient",
+      "best_score": 0.3005,
+      "retrieval_mode": "python-fallback",
+      "queries_used": [
+        "Who pays GST: the freelancer or the client?"
+      ],
+      "retrieved_sections": [
+        "CGST 31",
+        "CGST 2",
+        "CGST 15",
+        "CGST 9",
+        "CGST 9",
+        "CGST 31",
+        "IGST 12",
+        "IGST 5"
+      ],
+      "retrieved_labels": [
+        "CGST Act 2017, Section 31(3)",
+        "CGST Act 2017, Section 2(93)",
+        "CGST Act 2017, Section 15(5)",
+        "CGST Act 2017, Section 9(4)",
+        "CGST Act 2017, Section 9(5)",
+        "CGST Act 2017, Section 31(3)",
+        "IGST Act 2017, Section 12(11)",
+        "IGST Act 2017, Section 5(5)"
+      ],
+      "retrieval_recall": 1.0
+    }
+  ],
+  "rows": [],
+  "aggregate": {}
+}

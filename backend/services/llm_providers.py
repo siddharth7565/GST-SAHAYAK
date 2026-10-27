@@ -12,7 +12,7 @@ load_dotenv()
 
 class BaseLLMProvider(ABC):
     """
-    Abstract base class for all LLM providers (Gemini, OpenAI, Claude, Ollama).
+    Abstract base class for all LLM providers (Gemini, Mistral, Grok, Ollama Cloud, Claude, OpenAI, DeepSeek).
     Defines common interface for generating responses and checking configuration status.
     """
 
@@ -39,7 +39,7 @@ class GeminiProvider(BaseLLMProvider):
     Primary/default model: gemini-3.6-flash.
     """
 
-    def __init__(self, model_name: str = "gemini-3.6-flash"):
+    def __init__(self, model_name: str = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")):
         self._model_name = model_name
 
     @property
@@ -62,7 +62,7 @@ class GeminiProvider(BaseLLMProvider):
         client = genai.Client(api_key=api_key)
 
         # Primary active model: gemini-3.6-flash.
-        candidate_models = [self._model_name, "gemini-3.6-flash"]
+        candidate_models = [self._model_name]
         # Deduplicate while preserving order
         candidate_models = list(dict.fromkeys(candidate_models))
 
@@ -91,7 +91,7 @@ class OllamaProvider(BaseLLMProvider):
     Does NOT use localhost:11434 or local ollama serve.
     """
 
-    def __init__(self, model_name: str = "gpt-oss:20b", api_key: Optional[str] = None, base_url: Optional[str] = None):
+    def __init__(self, model_name: str = os.getenv("OLLAMA_MODEL", "gpt-oss:20b"), api_key: Optional[str] = None, base_url: Optional[str] = None):
         self._model_name = model_name
         self._api_key = api_key or os.getenv("OLLAMA_API_KEY")
         self._base_url = (base_url or os.getenv("OLLAMA_BASE_URL", "https://ollama.com")).rstrip("/")
@@ -182,7 +182,7 @@ class DeepSeekProvider(BaseLLMProvider):
     Connects to https://api.deepseek.com/chat/completions using DEEPSEEK_API_KEY.
     """
 
-    def __init__(self, model_name: str = "deepseek-v4-flash", api_key: Optional[str] = None):
+    def __init__(self, model_name: str = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash"), api_key: Optional[str] = None):
         self._model_name = model_name
         self._api_key = api_key or os.getenv("DEEPSEEK_API_KEY")
         self._base_url = "https://api.deepseek.com"
@@ -254,7 +254,7 @@ class OpenAIProvider(BaseLLMProvider):
     Handles missing keys cleanly without crashing application startup.
     """
 
-    def __init__(self, model_name: str = "gpt-4o"):
+    def __init__(self, model_name: str = os.getenv("OPENAI_MODEL", "gpt-4o")):
         self._model_name = model_name
 
     @property
@@ -293,7 +293,7 @@ class ClaudeProvider(BaseLLMProvider):
     Handles missing keys cleanly without crashing application startup.
     """
 
-    def __init__(self, model_name: str = "claude-3-5-sonnet-20241022"):
+    def __init__(self, model_name: str = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5")):
         self._model_name = model_name
 
     @property
@@ -333,7 +333,7 @@ class MistralProvider(BaseLLMProvider):
     Connects to https://api.mistral.ai/v1/chat/completions using MISTRAL_API_KEY.
     """
 
-    def __init__(self, model_name: str = "mistral-small-latest", api_key: Optional[str] = None):
+    def __init__(self, model_name: str = os.getenv("MISTRAL_MODEL", "mistral-small-latest"), api_key: Optional[str] = None):
         self._model_name = model_name
         self._api_key = api_key or os.getenv("MISTRAL_API_KEY")
         self._base_url = "https://api.mistral.ai"
@@ -405,7 +405,7 @@ class GrokProvider(BaseLLMProvider):
     Primary active model: grok-4.6.
     """
 
-    def __init__(self, model_name: str = "grok-4.6", api_key: Optional[str] = None):
+    def __init__(self, model_name: str = os.getenv("XAI_MODEL", "grok-4.6"), api_key: Optional[str] = None):
         self._model_name = model_name
         self._api_key = api_key or os.getenv("XAI_API_KEY")
         self._base_url = "https://api.x.ai/v1"

@@ -1,0 +1,276 @@
+[
+  {
+    "id": "q01_flagship",
+    "type": "answerable",
+    "query": "I'm a freelance graphic designer in Delhi, earning 15 lakh/year, half from Indian clients and half from a US client. Do I need GST registration, and what applies to each income source?",
+    "expected_sections": [
+      "CGST 22",
+      "CGST 24",
+      "IGST 16",
+      "IGST 13"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "The exemption notification for small inter-State service providers is NOT in the corpus; a good answer says what is missing instead of guessing.",
+    "expected_chunks": [
+      "cgst_s22_c1",
+      "cgst_s24_c1",
+      "igst_s2_c7",
+      "igst_s16_c1"
+    ]
+  },
+  {
+    "id": "q02_threshold_local",
+    "type": "answerable",
+    "query": "Does a freelance designer whose clients are all in the same state and who earns 15 lakh a year need GST registration?",
+    "expected_sections": [
+      "CGST 22"
+    ],
+    "key_facts": [
+      [
+        "twenty lakh",
+        "20 lakh",
+        "20,00,000"
+      ]
+    ],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s22_c1"
+    ]
+  },
+  {
+    "id": "q03_itc_conditions",
+    "type": "answerable",
+    "query": "What are the conditions for claiming input tax credit under Section 16?",
+    "expected_sections": [
+      "CGST 16"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "Fill key_facts after reading the Section 16(2) chunk in corpus.json.",
+    "expected_chunks": [
+      "cgst_s16_c2"
+    ]
+  },
+  {
+    "id": "q04_itc_depreciation",
+    "type": "answerable",
+    "query": "I claimed depreciation on the GST part of a capital asset. Can I still take input tax credit on that part?",
+    "expected_sections": [
+      "CGST 16"
+    ],
+    "key_facts": [
+      [
+        "not be allowed",
+        "not allowed",
+        "cannot",
+        "can not",
+        "no input tax credit"
+      ]
+    ],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s16_c6"
+    ]
+  },
+  {
+    "id": "q05_voluntary",
+    "type": "answerable",
+    "query": "Can I register for GST voluntarily even if my turnover is below the threshold?",
+    "expected_sections": [
+      "CGST 25"
+    ],
+    "key_facts": [
+      [
+        "voluntarily",
+        "voluntary"
+      ]
+    ],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s25_c4"
+    ]
+  },
+  {
+    "id": "q06_not_liable",
+    "type": "answerable",
+    "query": "Which persons are not liable to be registered under GST?",
+    "expected_sections": [
+      "CGST 23"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s23_c1"
+    ]
+  },
+  {
+    "id": "q07_zero_rated",
+    "type": "answerable",
+    "query": "Is a service I supply to a client outside India treated as a zero rated supply?",
+    "expected_sections": [
+      "IGST 16"
+    ],
+    "key_facts": [
+      [
+        "zero rated",
+        "zero-rated"
+      ]
+    ],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "igst_s16_c1",
+      "igst_s2_c7"
+    ]
+  },
+  {
+    "id": "q08_pos_outside_india",
+    "type": "answerable",
+    "query": "What is the place of supply of my services when the client is located outside India?",
+    "expected_sections": [
+      "IGST 13"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "igst_s13_c1"
+    ]
+  },
+  {
+    "id": "q09_interstate",
+    "type": "answerable",
+    "query": "When is a supply treated as an inter-State supply?",
+    "expected_sections": [
+      "IGST 7"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q10_time_of_supply",
+    "type": "answerable",
+    "query": "When does my liability to pay GST on services arise, i.e. what is the time of supply?",
+    "expected_sections": [
+      "CGST 13"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q11_tax_invoice",
+    "type": "answerable",
+    "query": "When must I issue a tax invoice for my services and what must it contain?",
+    "expected_sections": [
+      "CGST 31"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q12_value_of_supply",
+    "type": "answerable",
+    "query": "How is the value of my taxable supply determined for GST?",
+    "expected_sections": [
+      "CGST 15"
+    ],
+    "key_facts": [
+      [
+        "transaction value"
+      ]
+    ],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s15_c1"
+    ]
+  },
+  {
+    "id": "q13_returns",
+    "type": "answerable",
+    "query": "Which returns must a registered freelancer file for GST?",
+    "expected_sections": [
+      "CGST 37",
+      "CGST 39"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q14_reverse_charge",
+    "type": "answerable",
+    "query": "When is GST payable under reverse charge?",
+    "expected_sections": [
+      "CGST 9"
+    ],
+    "key_facts": [],
+    "expect_refusal": false,
+    "reviewed": false,
+    "notes": "",
+    "expected_chunks": [
+      "cgst_s9_c2"
+    ]
+  },
+  {
+    "id": "q15_weather",
+    "type": "out_of_scope",
+    "query": "What is the weather in Delhi today?",
+    "expected_sections": [],
+    "key_facts": [],
+    "expect_refusal": true,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q16_income_tax",
+    "type": "out_of_scope",
+    "query": "How do I file my income tax return and claim 80C deductions?",
+    "expected_sections": [],
+    "key_facts": [],
+    "expect_refusal": true,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q17_mutual_funds",
+    "type": "out_of_scope",
+    "query": "Which mutual fund should I invest in for retirement?",
+    "expected_sections": [],
+    "key_facts": [],
+    "expect_refusal": true,
+    "reviewed": false,
+    "notes": ""
+  },
+  {
+    "id": "q18_rate_borderline",
+    "type": "borderline",
+    "query": "What is the GST rate on graphic design services?",
+    "expected_sections": [],
+    "key_facts": [],
+    "expect_refusal": true,
+    "reviewed": false,
+    "notes": "Rate schedules (notifications) are not in the corpus. Refusal, or a cautious answer that says the rate is not in the sources, are both acceptable; judge manually."
+  }
+]
